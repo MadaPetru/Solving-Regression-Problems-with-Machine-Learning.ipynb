@@ -123,7 +123,6 @@ X_test = sc.transform (X_test)
 # by maximizing the distance between hyperplanes that contain data for various records.
 
 # svm_reg = svm.SVR()
-#
 # regressor = svm_reg.fit(X_train, y_train)
 # y_pred = regressor.predict(X_test)
 #
