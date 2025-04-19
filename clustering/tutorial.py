@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from sklearn import preprocessing
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 from matplotlib import pyplot as plt
@@ -51,15 +52,15 @@ km_model = KMeans(n_clusters=4)
 km_model.fit(features)
 
 # To print labels of the Iris dataset, execute the following script:
-print(km_model.labels_)
+# print(km_model.labels_)
 
 # step 3, display the plot for the 4 clusters
 # print the data points
-plt.scatter(features[:, 0], features[:, 1], c=km_model.labels_, cmap='rainbow')
+# plt.scatter(features[:, 0], features[:, 1], c=km_model.labels_, cmap='rainbow')
 
 # print the centroids
-plt.scatter(km_model.cluster_centers_[:, 0], km_model.cluster_centers_[:, 1], s=100, c='black')
-plt.show()
+# plt.scatter(km_model.cluster_centers_[:, 0], km_model.cluster_centers_[:, 1], s=100, c='black')
+# plt.show()
 
 # step 4, find the optimal number of clustes usign the elbow method !!!
 # Till now, in this chapter,
@@ -73,14 +74,43 @@ plt.show()
 
 
 # training KMeans on K values from 1 to 10
-loss =[]
-for i in range(1, 11):
-    km = KMeans(n_clusters = i).fit(features)
-    loss.append(km.inertia_)
 
-#printing loss against number of clusters
-plt.plot(range(1, 11), loss)
-plt.title('Finding Optimal Clusters via Elbow Method')
-plt.xlabel('Number of Clusters')
-plt.ylabel('loss')
+# loss =[]
+# for i in range(1, 11):
+#     km = KMeans(n_clusters = i).fit(features)
+#     loss.append(km.inertia_)
+
+# printing loss against number of clusters
+
+# plt.plot(range(1, 11), loss)
+# plt.title('Finding Optimal Clusters via Elbow Method')
+# plt.xlabel('Number of Clusters')
+# plt.ylabel('loss')
+# plt.show()
+
+# try now with 3 clusters, after we find the optimal number of clusters
+
+# training KMeans with 3 clusters
+km_model = KMeans(n_clusters=3)
+km_model.fit(features)
+
+# display the plot
+
+# pring the data points with prediced labels
+# plt.scatter(features[:, 0], features[:, 1], c=km_model.labels_, cmap='rainbow')
+
+# print the predicted centroids
+# plt.scatter(km_model.cluster_centers_[:, 0], km_model.cluster_centers_[:, 1], s=100, c='black')
+
+# plt.show()
+
+# step 5
+# check to see how close the alghorithm is,
+# using the labels, the actual results that we are trying to classify
+
+# converting categorical labels to numbers
+le = preprocessing.LabelEncoder()
+labels = le.fit_transform(labels)
+# pring the data points with original labels
+plt.scatter(features[:, 0], features[:, 1], c=labels, cmap='rainbow')
 plt.show()
